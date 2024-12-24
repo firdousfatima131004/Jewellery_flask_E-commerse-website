@@ -1,0 +1,25 @@
+.navbar-brand {
+     font-size: 1.5rem;
+     font-weight: bold;
+
+     /* Jewelry-themed color */
+}
+
+.nav-link {
+     color: black;
+     font-weight: bold;
+     font-size: 1rem;
+     margin: 0 10px;
+}
+
+.nav-link:hover {
+     color: #7F6354;
+     /* Hover color for links */
+}
+
+.icon-style {
+     color: black;
+}
+.icon-style:hover {
+     color: #7F6354;
+}
