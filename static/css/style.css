@@ -1,3 +1,7 @@
+body {
+     font-family: 'Playfair Display', serif;
+}
+
 .navbar-brand {
      font-size: 1.5rem;
      font-weight: bold;
@@ -20,6 +24,88 @@
 .icon-style {
      color: black;
 }
+
 .icon-style:hover {
      color: #7F6354;
+}
+
+
+/* Footer Styling */
+.footer {
+     background-color: #4a2c2a;
+     /* Deep brown color to match jewelry theme */
+     color: #fff;
+     padding: 40px 0;
+     font-family: 'Playfair Display', serif;
+}
+
+.footer-title {
+     font-size: 1.4rem;
+     font-weight: bold;
+     margin-bottom: 15px;
+     text-transform: uppercase;
+}
+
+.footer-text {
+     font-size: 1rem;
+     line-height: 1.6;
+}
+
+.footer-links {
+     list-style: none;
+     padding: 0;
+}
+
+.footer-links li {
+     margin-bottom: 10px;
+}
+
+.footer-links a {
+     color: #fff;
+     text-decoration: none;
+     font-size: 1rem;
+     transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+     color: #f8c95b;
+     /* Soft gold color for hover */
+}
+
+.social-icons {
+     display: flex;
+     gap: 15px;
+}
+
+.social-icon {
+     color: #fff;
+     font-size: 1.6rem;
+     transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+     color: #f8c95b;
+     /* Gold color for hover effect */
+}
+
+.footer-copyright {
+     font-size: 1rem;
+     color: #d1d1d1;
+     margin-bottom: 0;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+     .footer {
+          padding: 30px 0;
+     }
+
+     .footer-title {
+          font-size: 1.2rem;
+     }
+
+     .footer-text,
+     .footer-links a {
+          font-size: 0.9rem;
+     }
 }
