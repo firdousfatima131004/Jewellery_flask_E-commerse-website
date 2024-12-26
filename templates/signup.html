@@ -100,7 +100,8 @@
 </head>
 
 <body>
-     <!-- Navbar -->
+    
+     <!-- nav bar -->
      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
           <div class="container">
 
@@ -135,6 +136,11 @@
                     <a href="#">
                          <i class="fa-solid fa-magnifying-glass fa-1x icon-style"></i>
                     </a>
+                    {% if username %}
+                    
+                    &nbsp; &nbsp; <p class="text text-light mt-3 ml-4 p-2"  style="border:1px solid #4a2c2a; border-radius:40px; background-color:#4a2c2a;"> &nbsp;  Hi  {{ username }} !</p>
+                    {% endif %}
+               
                </div>
           </div>
      </nav>
@@ -150,10 +156,19 @@
                <div class="col">
                     <!-- Login Form -->
                     <div class="container-fluid">
-                         <form action="" method="POST">
+                         <form action="{{ url_for('signup')}}" method="POST">
                               <h2 class="text-center mb-4" style="color: #4a2c2a;">Create New Account</h2>
+                              {% if success %}
+                              <div class="text" style="border: 1px green; color:green">
+                                   <strong> {{ success }} </strong>
+                              </div>
+                              {% else %}
+                              <div class="text" style="border: 1px green; color:red">
+                                   <strong> {{ error }} </strong>
+                              </div>
+                              {% endif %}
                               <label for="user_name">User Name</label>
-                              <input type="text" id="user_name" name="user_name" placeholder="Enter your username">
+                              <input type="text" id="user_name" name="username" placeholder="Enter your username">
 
                               <label for="email">Email</label>
                               <input type="email" id="email" name="email" placeholder="Enter your email">

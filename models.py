@@ -11,3 +11,9 @@ class User(Base):
      role = Column(String(150))
      password = Column(String(150) , nullable=False)
      
+# class Product(Base):
+#      __tablename__ = 'products'
+#      id = Column(Integer , primary_key=True)
+#      productname =Column(String(150) , nullable=False)
+#      productCategory = Column(String(150) , nullable=False)
+     
