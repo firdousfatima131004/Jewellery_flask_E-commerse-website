@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Jewellery Website</title>
+     <!-- bootstrap link -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+     <!-- font awesome link -->
+     <script src="https://kit.fontawesome.com/b755c6ef44.js" crossorigin="anonymous"></script>
+
+     <!-- google font link -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+          rel="stylesheet">
+
+     <!-- css link-->
+     <link rel="stylesheet" href="{{url_for('static' ,filename ='css/style.css')}}">
+
+     <style>
+          .card {
+               border-radius: 12px;
+               transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+
+          .card:hover {
+               transform: scale(1.05);
+               box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+          }
+
+          .card-title {
+               font-size: 1.25rem;
+               font-weight: 600;
+               color: #4a2c2a;
+          }
+
+          .card-text {
+               font-size: 0.9rem;
+               color: #6a6a6a;
+          }
+
+          .btn-primary {
+               background-color: #4a2c2a;
+               border-color: #4a2c2a;
+          }
+
+          .btn-primary:hover {
+               background-color: #6a3c3a;
+               border-color: #6a3c3a;
+          }
+     </style>
+
+</head>
+
+<body>
+     <!-- nav bar -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+          <div class="container">
+
+               <a class="navbar-brand" href="#">Navbar</a>
+
+
+               <div class="mx-auto d-flex">
+                    <ul class="navbar-nav">
+                         <li class="nav-item">
+                              <a class="nav-link" href="/">Home</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="#">About Us</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="#">Blog</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="#">Products</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="/login/">Account</a>
+                         </li>
+                    </ul>
+               </div>
+
+
+               <div class="d-flex align-items-center">
+                    <a href="#" class="me-3">
+                         <i class="fa-solid fa-bag-shopping fa-1x icon-style"></i>
+                    </a>
+                    <a href="#">
+                         <i class="fa-solid fa-magnifying-glass fa-1x icon-style"></i>
+                    </a>
+                    {% if username %}
+
+                    &nbsp; &nbsp; <p class="text text-light mt-3 ml-4 p-2"
+                         style="border:1px solid #4a2c2a; border-radius:40px; background-color:#4a2c2a;"> &nbsp; Hi {{
+                         username }} !</p>
+                    {% endif %}
+
+               </div>
+          </div>
+     </nav>
+
+
+
+
+     <!-- Show Product Page -->
+     <div class="container py-5">
+          <h2 class="text-center mb-4" style="color: #4a2c2a;">Explore Our Collections</h2>
+          <div class="row">
+               <!-- Rings -->
+               <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                         <img src="{{url_for('static' ,filename ='img/product_ring_logo.png')}}" class="card-img-top" alt="Rings"
+                              style="height: 250px; object-fit: cover;">
+                         <div class="card-body" style="background-color: #fef9f6;">
+                              <h5 class="card-title">Rings</h5>
+                              <p class="card-text">Discover our exclusive collection of elegant rings.</p>
+                              <div class="text-center">
+                                   <a href="/show_product/rings"><button class="btn btn-primary">Explore</button></a>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+
+               <!-- Necklace -->
+               <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                         <img src="{{url_for('static' ,filename ='img/product_necklace_logo.png')}}" class="card-img-top" alt="Necklace"
+                              style="height: 250px; object-fit: cover;">
+                         <div class="card-body" style="background-color: #fef9f6;">
+                              <h5 class="card-title">Necklaces</h5>
+                              <p class="card-text">Explore our exquisite necklace designs for every occasion.</p>
+                              <div class="text-center">
+                                   <a href="/show_product/necklaces">
+                                        <button class="btn btn-primary">Explore</button>
+                                    </a>
+
+                              </div>
+                         </div>
+                    </div>
+               </div>
+
+               <!-- Pendant -->
+               <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                         <img src="{{url_for('static' ,filename ='img/product_pendant_logo.png')}}" class="card-img-top" alt="Pendant"
+                              style="height: 250px; object-fit: cover;">
+                         <div class="card-body" style="background-color: #fef9f6;">
+                              <h5 class="card-title">Pendants</h5>
+                              <p class="card-text">Shop our stunning collection of pendants to match your style.</p>
+                              <div class="text-center">
+                                   <a href="/show_product/pendant"><button class="btn btn-primary">Explore</button></a>
+
+                              </div>
+                         </div>
+                    </div>
+               </div>
+
+               <!-- Earrings -->
+               <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                         <img src="{{url_for('static' ,filename ='img/product_Earrings_logo.png')}}" class="card-img-top" alt="Earrings"
+                              style="height: 250px; object-fit: cover;">
+                         <div class="card-body" style="background-color: #fef9f6;">
+                              <h5 class="card-title">Earrings</h5>
+                              <p class="card-text">Find your perfect pair of elegant earrings.</p>
+                              <div class="text-center">
+                                   <a href="/show_product/earrings">
+                                        <button class="btn btn-primary">Explore</button>
+                                    </a>
+ 
+                              </div>
+                         </div>
+                    </div>
+               </div>
+
+               <!-- Bracelet -->
+               <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                         <img src="{{url_for('static' ,filename ='img/product_Bracelet_logo.png')}}" class="card-img-top" alt="Bracelet"
+                              style="height: 250px; object-fit: cover;">
+                         <div class="card-body" style="background-color: #fef9f6;">
+                              <h5 class="card-title">Bracelets</h5>
+                              <p class="card-text">Browse through our delicate and stylish bracelet collection.</p>
+                              <div class="text-center">
+                                   <a href="/show_product/bracelets">
+                                        <button class="btn btn-primary">Explore</button>
+                                    </a>
+
+                              </div>
+                         </div>
+                    </div>
+               </div>
+
+               <!-- Full Set -->
+               <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                         <img src="{{url_for('static' ,filename ='img/product_fullset_logo.png')}}" class="card-img-top" alt="Full Set"
+                              style="height: 250px; object-fit: cover;">
+                         <div class="card-body" style="background-color: #fef9f6;">
+                              <h5 class="card-title">Full Set</h5>
+                              <p class="card-text">Complete your look with our stunning full jewelry sets.</p>
+                              <div class="text-center">
+                                   <a href="/show_product/FullSet">
+                                        <button class="btn btn-primary">Explore</button>
+                                    </a>
+
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+
+
+
+     <!-- Footer Section -->
+     <footer class="footer">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-4">
+                         <h5 class="footer-title">About Us</h5>
+                         <p class="footer-text">We are passionate about providing the finest jewelry that reflects
+                              timeless elegance. Our designs are crafted with love and care, ensuring every piece tells
+                              a story.</p>
+                    </div>
+
+
+                    <div class="col-md-4">
+                         <h5 class="footer-title">Quick Links</h5>
+                         <ul class="footer-links">
+                              <li><a href="#">Home</a></li>
+                              <li><a href="#">About Us</a></li>
+                              <li><a href="#">Products</a></li>
+                              <li><a href="#">Blog</a></li>
+                              <li><a href="#">Contact</a></li>
+                         </ul>
+                    </div>
+
+
+                    <div class="col-md-4">
+                         <h5 class="footer-title">Follow Us</h5>
+                         <div class="social-icons">
+                              <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                              <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+                              <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                              <a href="#" class="social-icon"><i class="fa-brands fa-pinterest"></i></a>
+                         </div>
+                    </div>
+               </div>
+
+
+               <div class="text-center mt-4">
+                    <p class="footer-copyright">&copy; 2024 Developed By Sheikh Firdous Fatima. All rights reserved.</p>
+               </div>
+          </div>
+     </footer>
+
+
+
+
+     <!-- bootstrap js link -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          crossorigin="anonymous"></script>
+</body>
+
+</html>

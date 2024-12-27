@@ -20,16 +20,16 @@
 
      <!-- css link-->
      <link rel="stylesheet" href="{{url_for('static' ,filename ='css/style.css')}}">
+
      <style>
           .card {
-               transition: transform 0.2s ease, box-shadow 0.2s ease;
-               background-color: #fef9f6;
                border-radius: 10px;
           }
 
-          .card:hover {
-               transform: scale(1.05);
-               box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+          .card-header {
+               border-top-left-radius: 10px;
+               border-top-right-radius: 10px;
+               background-color: #4a2c2a !important;
           }
 
           .btn-primary {
@@ -42,8 +42,15 @@
                border-color: #653b38;
           }
 
-          .text-primary {
-               color: #4a2c2a !important;
+          .form-control,
+          .form-select {
+               border: 1px solid #4a2c2a;
+          }
+
+          .form-control:focus,
+          .form-select:focus {
+               box-shadow: 0 0 5px rgba(74, 44, 42, 0.5);
+               border-color: #4a2c2a;
           }
      </style>
 </head>
@@ -95,78 +102,80 @@
           </div>
      </nav>
 
-     <!-- admin content -->
+
+     <!-- Add Product Form -->
      <div class="container py-5">
-          <div class="row g-4">
-               <!-- Add Products -->
-               <div class="col-md-4">
-                    <div class="card text-center border-0 shadow-sm">
-                         <div class="card-body">
-                              <i class="fa-solid fa-gem fa-2x text-primary"></i>
-                              <h5 class="card-title mt-3">Add Products</h5>
-                              <a href="/addProduct/"><button type="submit" class="btn btn-primary mt-2">Add Products</button></a>
+          <div class="row justify-content-center">
+               <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm">
+                         <div class="card-header text-center bg-primary text-white">
+                              <h4>Add New Product</h4>
                          </div>
-                    </div>
-               </div>
+                         <div class="card-body" style="background-color: #fef9f6;">
+                              <form action="{{ url_for('add_product')}}" method="POST" enctype="multipart/form-data">
+                                   <!-- Product Name -->
 
-               <!-- View Products -->
-               <div class="col-md-4">
-                    <div class="card text-center border-0 shadow-sm">
-                         <div class="card-body">
-                              <i class="fa-solid fa-eye fa-2x text-primary"></i>
-                              <h5 class="card-title mt-3">View Products</h5>
-                              <a href="/product/"><button type="submit" class="btn btn-primary mt-2">View Products</button></a> 
-                         </div>
-                    </div>
-               </div>
+                                   {% if success %}
+                                        <div class="text" style="border: 1px green; color:green"><strong> {{ success }} </strong>
+                                        </div>
+                                   {% else %}
+                                        <div class="text" style="border: 1px green; color:red">
+                                        <strong> {{ error }} </strong>
+                                   
+                                   {% endif %}
 
-               <!-- Product Analytics -->
-               <div class="col-md-4">
-                    <div class="card text-center border-0 shadow-sm">
-                         <div class="card-body">
-                              <i class="fa-solid fa-chart-line fa-2x text-primary"></i>
-                              <h5 class="card-title mt-3">Product Analytics</h5>
-                              <button type="submit" class="btn btn-primary mt-2">Product Analytics</button>
-                         </div>
-                    </div>
-               </div>
-          </div>
 
-          <div class="row g-4 mt-4">
-               <!-- User -->
-               <div class="col-md-4">
-                    <div class="card text-center border-0 shadow-sm">
-                         <div class="card-body">
-                              <i class="fa-solid fa-users fa-2x text-primary"></i>
-                              <h5 class="card-title mt-3">User</h5>
-                              <button type="submit" class="btn btn-primary mt-2">User</button>
-                         </div>
-                    </div>
-               </div>
+                                   <div class="mb-3">
+                                        <label for="productName" class="form-label">Product Name</label>
+                                        <input type="text" class="form-control" id="productName" placeholder="Enter product name" name="pname" required>
+                                   </div>
 
-               <!-- User Feedback -->
-               <div class="col-md-4">
-                    <div class="card text-center border-0 shadow-sm">
-                         <div class="card-body">
-                              <i class="fa-solid fa-comment-dots fa-2x text-primary"></i>
-                              <h5 class="card-title mt-3">User Feedback</h5>
-                              <button type="submit" class="btn btn-primary mt-2">User Feedback</button>
-                         </div>
-                    </div>
-               </div>
+                                   <!-- Product Description -->
+                                   <div class="mb-3">
+                                        <label for="productDescription" class="form-label">Product Description</label>
+                                        <textarea class="form-control" id="productDescription" rows="4"
+                                             placeholder="Enter product description" name="desc" required></textarea>
+                                   </div>
 
-               <!-- User Analytics -->
-               <div class="col-md-4">
-                    <div class="card text-center border-0 shadow-sm">
-                         <div class="card-body">
-                              <i class="fa-solid fa-chart-simple fa-2x text-primary"></i>
-                              <h5 class="card-title mt-3">User Analytics</h5>
-                              <button type="submit" class="btn btn-primary mt-2">User Analytics</button>
+                                   <!-- Product Price -->
+                                   <div class="mb-3">
+                                        <label for="productPrice" class="form-label">Price (₹)</label>
+                                        <input type="number" class="form-control" id="productPrice"
+                                             placeholder="Enter product price" name="pprice" required>
+                                   </div>
+
+                                   <!-- Product Category -->
+                                   <div class="mb-3">
+                                        <label for="productCategory" class="form-label">Category</label>
+                                        <select class="form-select" id="productCategory" name="category" required>
+                                             <option selected disabled>Choose category</option>
+                                             <option value="rings">Rings</option>
+                                             <option value="necklaces">Necklaces</option>
+                                             <option value="earrings">Earrings</option>
+                                             <option value="bracelets">Bracelets</option>
+                                             <option value="FullSet">Full Set</option>
+                                             <option value="pendant">Pendant</option>
+                                        </select>
+                                   </div>
+
+                                   <!-- Product Image -->
+                                   <div class="mb-3">
+                                        <label for="productImage" class="form-label">Upload Image</label>
+                                        <input class="form-control" type="file" id="productImage" accept="image/*" name="img" required>
+                                   </div>
+
+                                   <!-- Submit Button -->
+                                   <div class="text-center">
+                                        <button type="submit" class="btn btn-primary w-100">Add Product</button>
+                                   </div>
+                              </form>
                          </div>
                     </div>
                </div>
           </div>
      </div>
+
+
 
      <!-- Footer Section -->
      <footer class="footer">
@@ -176,8 +185,7 @@
                     <div class="col-md-4">
                          <h5 class="footer-title">About Us</h5>
                          <p class="footer-text">We are passionate about providing the finest jewelry that reflects
-                              timeless elegance. Our designs are crafted with love and care, ensuring every piece
-                              tells
+                              timeless elegance. Our designs are crafted with love and care, ensuring every piece tells
                               a story.</p>
                     </div>
 
@@ -207,17 +215,11 @@
 
 
                <div class="text-center mt-4">
-                    <p class="footer-copyright">&copy; 2024 Developed By Sheikh Firdous Fatima. All rights
-                         reserved.</p>
+                    <p class="footer-copyright">&copy; 2024 Developed By Sheikh Firdous Fatima. All rights reserved.</p>
                </div>
           </div>
      </footer>
 
-
-
-
-
-     
 
 
 

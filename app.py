@@ -1,16 +1,21 @@
 from flask import Flask , request ,  render_template,session
 from markupsafe import escape
 from werkzeug.security import generate_password_hash,check_password_hash
-from models import User
+from models import User , Product
 from database import session as db_session
+import os
 app = Flask(__name__)
 app.secret_key='JEWELLRY3SHOP45SITE'
 
+
+# home page
 @app.route("/")
 def home():
      username=session.get('username')
      return render_template('index.html',username=username)
 
+
+# login
 @app.route("/login/",methods=['GET','POST'])
 def login():
      if request.method=='POST':
@@ -34,6 +39,8 @@ def login():
                print("USER ERROR")
      return render_template('login.html')
 
+
+#sign up
 @app.route("/signup/",methods=['GET','POST'])
 def signup():
      if request.method=='POST':     
@@ -45,6 +52,7 @@ def signup():
 
           new_user=User(username=uname,email=email,role=role,password=hashed_password)
           
+          #admin
           # new_admin=User(username="admin",email="admin@jewelerry.in",role='admin',password=generate_password_hash('admin@123'))
           # db_session.add(new_admin)
           # db_session.commit()
@@ -62,3 +70,53 @@ def signup():
 @app.route('/admin/')
 def admin():
      return render_template('admin.html')
+
+@app.route('/product/')
+def products():
+     return render_template('view_product.html')
+
+# add_products
+@app.route('/addProduct/' , methods=['GET', 'POST']    )
+def add_product():
+     if request.method == 'POST':
+          ProductName = request.form.get('pname')
+          productDescription = request.form.get('desc')
+          productPrice = request.form.get('pprice')
+          productCategory = request.form.get('category')
+          img = request.files.get('img')
+          
+          if img:
+               img.save(os.path.join("static/UserImg",img.filename))
+               path = f"/static/UserImg/{img.filename}"
+               data = Product(productname = ProductName ,productDesc = productDescription,productPrice = productPrice ,productCategory =productCategory ,img = path)
+               
+               db_session.add(data)
+               db_session.commit()
+               
+               try:
+                    db_session.add(data)
+                    db_session.commit()
+                    return  render_template('add_product.html',success="Product added Successfully")
+               except:
+                    db_session.rollback()
+                    return render_template('add_product.html',error="Their is some error Kindly fill all fields!")
+               
+               
+          
+     return render_template('add_product.html')
+     
+     
+
+# show products
+@app.route('/show_product/<string:category>', methods=['GET'])
+def show_product(category):
+    products = db_session.query(Product).filter_by(productCategory=category).all()
+    return render_template('show_product.html', products=products, category=category)
+
+
+
+
+
+
+if __name__ == '__main__':
+     app.run(debug=True)
