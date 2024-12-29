@@ -70,7 +70,7 @@
                               <a class="nav-link" href="/">Home</a>
                          </li>
                          <li class="nav-item">
-                              <a class="nav-link" href="#">About Us</a>
+                              <a class="nav-link" href="/aboutus/">About Us</a>
                          </li>
                          <li class="nav-item">
                               <a class="nav-link" href="#">Blog</a>
@@ -81,6 +81,11 @@
                          <li class="nav-item">
                               <a class="nav-link" href="/login/">Account</a>
                          </li>
+                         {% if username %}
+                              <li class="nav-item">
+                                   <a class="nav-link" href="/logout/">Logout</a>
+                              </li>
+                         {% endif %}
                     </ul>
                </div>
 
@@ -235,7 +240,7 @@
                          <h5 class="footer-title">Quick Links</h5>
                          <ul class="footer-links">
                               <li><a href="#">Home</a></li>
-                              <li><a href="#">About Us</a></li>
+                              <li><a href="/aboutus/">About Us</a></li>
                               <li><a href="#">Products</a></li>
                               <li><a href="#">Blog</a></li>
                               <li><a href="#">Contact</a></li>

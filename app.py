@@ -1,4 +1,4 @@
-from flask import Flask , request ,  render_template,session
+from flask import Flask , request ,  render_template,session,redirect,url_for
 from markupsafe import escape
 from werkzeug.security import generate_password_hash,check_password_hash
 from models import User , Product
@@ -18,6 +18,7 @@ def home():
 # login
 @app.route("/login/",methods=['GET','POST'])
 def login():
+     username=session.get('username')
      if request.method=='POST':
           email=request.form.get('email')
           password=request.form.get('password')
@@ -37,12 +38,13 @@ def login():
                     return render_template('login.html',password_error="Wrong password")
           else:
                print("USER ERROR")
-     return render_template('login.html')
+     return render_template('login.html',username=username)
 
 
 #sign up
 @app.route("/signup/",methods=['GET','POST'])
 def signup():
+     username=session.get('username')
      if request.method=='POST':     
           uname=request.form.get('username')
           email=request.form.get('email') 
@@ -65,15 +67,30 @@ def signup():
                return render_template('signup.html',error="This email already exists!")
           
           
-     return render_template('signup.html')
+     return render_template('signup.html',username=username)
 
+# admin page
 @app.route('/admin/')
 def admin():
+     
+     if 'username' not in session or session.get('role') !='admin':
+          return redirect(url_for('signup'))
+     
      return render_template('admin.html')
+#logout
+@app.route('/logout/')
+def logout():
+     session.clear()
+     return render_template('index.html')
+     
 
+#viewing product page
 @app.route('/product/')
 def products():
      return render_template('view_product.html')
+
+
+
 
 # add_products
 @app.route('/addProduct/' , methods=['GET', 'POST']    )
@@ -107,13 +124,17 @@ def add_product():
      
      
 
-# show products
+# showing products
 @app.route('/show_product/<string:category>', methods=['GET'])
 def show_product(category):
     products = db_session.query(Product).filter_by(productCategory=category).all()
     return render_template('show_product.html', products=products, category=category)
 
-
+# about us page
+@app.route('/aboutus/')
+def about_us():
+     username=session.get('username')
+     return render_template('aboutus.html',username=username)
 
 
 
