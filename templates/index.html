@@ -20,6 +20,130 @@
 
      <!-- css link-->
      <link rel="stylesheet" href="{{url_for('static' ,filename ='css/style.css')}}">
+
+     <style>
+          /* From Uiverse.io by Spacious74 */
+          .button {
+               font-size: 1.4em;
+               padding: 0.6em 0.8em;
+               border-radius: 0.5em;
+               border: none;
+               background-color: #C3810F;
+               color: #fff;
+               cursor: pointer;
+          }
+
+          .button:hover {
+               box-shadow: 2px 2px 4px #4a2c2a;
+          }
+
+          .parent {
+               width: 320px;
+               margin: 20px auto;
+               /* Centered with minimal margin */
+               padding: 0;
+               /* Remove extra padding */
+               display: flex;
+               justify-content: center;
+               align-items: center;
+          }
+
+          /* Card structure */
+          .card {
+              /* background: linear-gradient(145deg, #b5916c, #d4b38b);*/
+              background-color: #ece1d5;
+               border-radius: 15px;
+               box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+               transition: transform 0.4s ease, box-shadow 0.4s ease;
+               text-align: center;
+               padding: 20px;
+          }
+
+          /* Card hover */
+          .card:hover {
+               transform: scale(1.05);
+               box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+          }
+
+          /* Card image */
+          .card img {
+               width: 100%;
+               border-radius: 10px;
+               object-fit: cover;
+               transition: transform 0.4s ease;
+          }
+
+          .card:hover img {
+               transform: scale(1.1);
+          }
+
+          /* Card title */
+          .card-title {
+               font-size: 18px;
+               font-weight: 700;
+               color: #4a2c2a;
+               margin-top: 15px;
+               text-transform: uppercase;
+               letter-spacing: 1px;
+          }
+
+          /* Optional container tweaks */
+          .container {
+               padding: 0 15px;
+               /* Adjust padding for tighter layout */
+          }
+
+          .row {
+               margin: 0;
+               /* Remove Bootstrap default margins */
+          }
+          .btn {
+               background-color: #4a2c2a;
+               margin-top: 5px;
+               border: 2px solid #4a2c2a;
+          }
+
+          .features {
+               display: flex;
+               justify-content: space-around;
+               align-items: center;
+               text-align: center;
+               padding: 40px;
+          }
+
+          .feature {
+               width: 22%;
+               padding: 20px;
+               border: 1px solid #e5e5e5;
+               border-radius: 8px;
+               background-color: #f9f9f9;
+               transition: transform 0.3s, box-shadow 0.3s;
+          }
+
+          .feature:hover {
+               transform: translateY(-5px);
+               box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+          }
+
+          .feature i {
+               font-size: 40px;
+               color: #b5916c;
+               margin-bottom: 10px;
+          }
+
+          .feature h3 {
+               font-size: 20px;
+               color: #333333;
+               margin: 10px 0;
+          }
+
+          .feature p {
+               font-size: 16px;
+               color: #555555;
+               margin: 0;
+          }
+     </style>
+
 </head>
 
 <body>
@@ -42,15 +166,15 @@
                               <a class="nav-link" href="#">Blog</a>
                          </li>
                          <li class="nav-item">
-                              <a class="nav-link" href="#">Products</a>
+                              <a class="nav-link" href="/product/">Products</a>
                          </li>
                          <li class="nav-item">
                               <a class="nav-link" href="/login/">Account</a>
                          </li>
                          {% if username %}
-                              <li class="nav-item">
-                                   <a class="nav-link" href="/logout/">Logout</a>
-                              </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="/logout/">Logout</a>
+                         </li>
                          {% endif %}
                     </ul>
                </div>
@@ -64,28 +188,165 @@
                          <i class="fa-solid fa-magnifying-glass fa-1x icon-style"></i>
                     </a>
                     {% if username %}
-                    
-                    &nbsp; &nbsp; <p class="text text-light mt-3 ml-4 p-2"  style="border:1px solid #4a2c2a; border-radius:40px; background-color:#4a2c2a;"> &nbsp;  Hi  {{ username }} !</p>
+
+                    &nbsp; &nbsp; <p class="text text-light mt-3 ml-4 p-2"
+                         style="border:1px solid #4a2c2a; border-radius:40px; background-color:#4a2c2a;"> &nbsp; Hi {{
+                         username }} !</p>
                     {% endif %}
-               
+
+
                </div>
           </div>
      </nav>
 
 
+     <!-- main content -->
+     <div class="container">
+          <div class="row mt-4">
+               <div class="col">
+                    <h1 class="display-2" style="color: #4a2c2a;">Where Dreams Meet</h1>
+                    <h2 class="display-4" style="color: #C3810F;">Sparkle ! <i class="fa-solid fa-wand-sparkles"></i>
+                    </h2>
+                    <h3 class="display-4" style="color: #cbb17d;">Experience The Brilliance Of Craftsmanship </h3>
+
+
+                    <div class="container mt-5">
+                         <a href="/product/"><button class="button">Explore And Get Your OwnSparkle!</button></a>
+                    </div>
+               </div>
+               <div class="col">
+                    <img src="{{url_for('static', filename='img/Home_banner.png')}}" alt="portrait banner"
+                         style="width: 100%; height: 100%; object-fit: cover;">
+               </div>
+          </div>
+     </div>
+
+
+     <!-- product category -->
+     <div class="container">
+          <h1 class="text-center" style="color: #4a2c2a;
+               text-align: center;
+               margin-bottom: 20px;">Product Category</h1>
+          <div class="row">
+               <div class="parent">
+                    <div class="card">
+                         <div class="content-box">
+                              <img src="{{url_for('static', filename='img/ring.png')}}" alt="Ring" class="card-image">
+                              <h2 class="card-title">Ring</h2>
+                              <a href="/show_product/rings"><button class="btn btn-primary">Explore</button></a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="parent">
+                    <div class="card">
+                         <div class="content-box">
+                              <img src="{{url_for('static', filename='img/necklace.png')}}" alt="Ring"
+                                   class="card-image">
+                              <h2 class="card-title">Necklaces</h2>
+                              <a href="/show_product/necklaces">
+                                   <button class="btn btn-primary">Explore</button>
+                              </a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="parent">
+                    <div class="card">
+                         <div class="content-box">
+                              <img src="{{url_for('static', filename='img/product_Earrings_logo.png')}}" alt="Ring"
+                                   class="card-image">
+                              <h2 class="card-title">Earrings</h2>
+                              <a href="/show_product/earrings">
+                                   <button class="btn btn-primary">Explore</button>
+                              </a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="parent">
+                    <div class="card">
+                         <div class="content-box">
+                              <img src="{{url_for('static', filename='img/pendent.png')}}" alt="Ring"
+                                   class="card-image">
+                              <h2 class="card-title">pendants</h2>
+                              <a href="/show_product/pendant"><button class="btn btn-primary">Explore</button></a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="parent">
+                    <div class="card">
+                         <div class="content-box">
+                              <img src="{{url_for('static', filename='img/bangles.png')}}" alt="Ring"
+                                   class="card-image">
+                              <h2 class="card-title">Bracelets</h2>
+                              <a href="/show_product/bracelets">
+                                   <button class="btn btn-primary">Explore</button>
+                              </a>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="parent">
+                    <div class="card">
+                         <div class="content-box">
+                              <img src="{{url_for('static', filename='img/full_set.png')}}" alt="Ring"
+                                   class="card-image">
+                              <h2 class="card-title">Full Set</h2>
+                              <a href="/show_product/FullSet">
+                                   <button class="btn btn-primary">Explore</button>
+                              </a>
+                         </div>
+                    </div>
+               </div>
+
+          </div>
+     </div>
+
+     <!-- policies section -->
+     <h1 class="text-center mt-4" style="color: #4a2c2a;
+               text-align: center;">Policies</h1>
+     <div class="features">
+          <div class="feature">
+               <i class="fas fa-certificate"></i>
+               <h3>Certified</h3>
+               <p>Available certificates of authenticity</p>
+          </div>
+          <div class="feature">
+               <i class="fas fa-shield-alt"></i>
+               <h3>Secure</h3>
+               <p>Certified marketplace since started</p>
+          </div>
+          <div class="feature">
+               <i class="fas fa-shipping-fast"></i>
+               <h3>Shipping</h3>
+               <p>Free, fast, and reliable worldwide</p>
+          </div>
+          <div class="feature">
+               <i class="fas fa-sync-alt"></i>
+               <h3>Transparent</h3>
+               <p>Easy and simple returns guaranteed</p>
+          </div>
+     </div>
+
+
+
+
      <!-- Footer Section -->
-     <footer class="footer">
+     <footer class="footer mt-4">
           <div class="container">
                <div class="row">
-                    
+
                     <div class="col-md-4">
                          <h5 class="footer-title">About Us</h5>
                          <p class="footer-text">We are passionate about providing the finest jewelry that reflects
-                              timeless elegance. Our designs are crafted with love and care, ensuring every piece tells
+                              timeless elegance. Our designs are crafted with love and care, ensuring every piece
+                              tells
                               a story.</p>
                     </div>
 
-                    
+
                     <div class="col-md-4">
                          <h5 class="footer-title">Quick Links</h5>
                          <ul class="footer-links">
@@ -97,7 +358,7 @@
                          </ul>
                     </div>
 
-                    
+
                     <div class="col-md-4">
                          <h5 class="footer-title">Follow Us</h5>
                          <div class="social-icons">
@@ -109,9 +370,10 @@
                     </div>
                </div>
 
-               
+
                <div class="text-center mt-4">
-                    <p class="footer-copyright">&copy; 2024 Developed By Sheikh Firdous Fatima. All rights reserved.</p>
+                    <p class="footer-copyright">&copy; 2024 Developed By Sheikh Firdous Fatima. All rights
+                         reserved.</p>
                </div>
           </div>
      </footer>

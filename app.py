@@ -1,9 +1,13 @@
-from flask import Flask , request ,  render_template,session,redirect,url_for
+from flask import Flask , request ,  render_template,session,redirect,url_for ,jsonify
 from markupsafe import escape
 from werkzeug.security import generate_password_hash,check_password_hash
 from models import User , Product
 from database import session as db_session
 import os
+import requests
+import http.client
+import json
+
 app = Flask(__name__)
 app.secret_key='JEWELLRY3SHOP45SITE'
 
@@ -87,7 +91,8 @@ def logout():
 #viewing product page
 @app.route('/product/')
 def products():
-     return render_template('view_product.html')
+     username=session.get('username')
+     return render_template('view_product.html',username=username)
 
 
 
@@ -95,6 +100,7 @@ def products():
 # add_products
 @app.route('/addProduct/' , methods=['GET', 'POST']    )
 def add_product():
+     username=session.get('username')
      if request.method == 'POST':
           ProductName = request.form.get('pname')
           productDescription = request.form.get('desc')
@@ -113,28 +119,31 @@ def add_product():
                try:
                     db_session.add(data)
                     db_session.commit()
-                    return  render_template('add_product.html',success="Product added Successfully")
+                    return  render_template('add_product.html',success="Product added Successfully",username=username)
                except:
                     db_session.rollback()
-                    return render_template('add_product.html',error="Their is some error Kindly fill all fields!")
+                    return render_template('add_product.html',error="Their is some error Kindly fill all fields!",username=username)
                
                
           
-     return render_template('add_product.html')
+     return render_template('add_product.html',username=username)
      
      
 
 # showing products
 @app.route('/show_product/<string:category>', methods=['GET'])
 def show_product(category):
+    username=session.get('username')
     products = db_session.query(Product).filter_by(productCategory=category).all()
-    return render_template('show_product.html', products=products, category=category)
+    return render_template('show_product.html', products=products, category=category,username=username)
 
 # about us page
 @app.route('/aboutus/')
 def about_us():
      username=session.get('username')
      return render_template('aboutus.html',username=username)
+
+
 
 
 
