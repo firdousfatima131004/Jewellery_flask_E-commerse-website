@@ -121,17 +121,4 @@ body {
           order: 2;
      }
 }
-@media only screen and (min-width: 390px){
-     .row {
-          display: flex;
-          flex-direction: column;
-     }
 
-     .row .col:first-child {
-          order: 1;
-     }
-
-     .row .col:last-child {
-          order: 2;
-     }
-}
