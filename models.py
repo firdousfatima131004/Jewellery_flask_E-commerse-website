@@ -20,3 +20,13 @@ class Product(Base):
      productCategory = Column(String(150) , nullable=False)
      img = Column(String(200))
      
+class Blog(Base):
+    __tablename__ = 'addblogs'
+    id = Column(Integer, primary_key=True)
+    blogtitle = Column(String(150), nullable=False)
+    blogDesc = Column(String(150), nullable=False)
+    bimg = Column(String(200))
+    url = Column(String(150), nullable=False)
+     
+
+     

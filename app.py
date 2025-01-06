@@ -1,7 +1,7 @@
 from flask import Flask , request ,  render_template,session,redirect,url_for ,jsonify
 from markupsafe import escape
 from werkzeug.security import generate_password_hash,check_password_hash
-from models import User , Product
+from models import User , Product , Blog
 from database import session as db_session
 import os
 import requests
@@ -143,10 +143,50 @@ def about_us():
      username=session.get('username')
      return render_template('aboutus.html',username=username)
 
-
-@app.route('/blog/')
+# add blog page
+@app.route("/blog/", methods=['GET', 'POST'])
 def blog():
-    return render_template('blog.html')
+    username = session.get('username')
+    
+    if request.method == 'POST':
+        blogTitle = request.form.get('btitle')
+        blogDescription = request.form.get('bdesc')  # Corrected to match the form
+        img = request.files.get('img')
+        url = request.form.get('url')
+
+        # Check if all required fields are filled
+        if not blogTitle or not blogDescription or not url or not img:
+            return render_template('blog.html', error="Please fill all the fields.", username=username)
+
+        # Save the uploaded image if it exists
+        img_path = None
+        if img:
+            img_path = os.path.join("static/UserImg", img.filename)
+            img.save(img_path)
+
+        # Create a new Blog entry
+        data = Blog(blogtitle=blogTitle, blogDesc=blogDescription, bimg=img_path, url=url)
+
+        try:
+            db_session.add(data)
+            db_session.commit()
+            return render_template('blog.html', success="Blog added successfully.", username=username)
+        except Exception as e:
+            db_session.rollback()
+            return render_template('blog.html', error=f"An error occurred: {str(e)}", username=username)
+
+    return render_template('blog.html', username=username)
+
+
+#show blog page
+@app.route("/blogs/")
+def show_blog():
+     username = session.get('username')
+     all_data = db_session.query(Blog).all()
+     for blog in all_data:
+          blog.bimg = blog.bimg.replace("\\", "/")
+          db_session.commit()
+     return render_template('show_blog.html' , data = all_data , username=username)
 
 
 if __name__ == '__main__':
