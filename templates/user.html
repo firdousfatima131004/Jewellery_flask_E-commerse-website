@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Jewellery Website</title>
+     <!-- bootstrap link -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+     <!-- font awesome link -->
+     <script src="https://kit.fontawesome.com/b755c6ef44.js" crossorigin="anonymous"></script>
+
+     <!-- google font link -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+          rel="stylesheet">
+
+     <!-- css link-->
+     <link rel="stylesheet" href="{{url_for('static' ,filename ='css/style.css')}}">
+
+     <style>
+          .card:hover {
+               transform: scale(1.03);
+               box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+               transition: all 0.3s ease-in-out;
+          }
+
+          .btn:hover {
+               background-color: #4a2926 !important;
+               color: white !important;
+          }
+     </style>
+
+</head>
+
+<body>
+     <!-- nav bar -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+          <div class="container">
+               <img style="height: 45px; object-fit :cover;" src="{{url_for ('static',filename = 'img/logo.png')}}"
+                    alt="logo">
+
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+               </button>
+
+
+               <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="mx-auto d-flex">
+                         <ul class="navbar-nav">
+                              <li class="nav-item">
+                                   <a class="nav-link" href="/">Home</a>
+                              </li>
+                              <li class="nav-item">
+                                   <a class="nav-link" href="/aboutus/">About Us</a>
+                              </li>
+                              <li class="nav-item">
+                                   <a class="nav-link" href="/blogs/">Blog</a>
+                              </li>
+                              <li class="nav-item">
+                                   <a class="nav-link" href="/product/">Products</a>
+                              </li>
+                              <li class="nav-item">
+                                   <a class="nav-link" href="/login/">Account</a>
+                              </li>
+                              {% if username %}
+                              <li class="nav-item">
+                                   <a class="nav-link" href="/logout/">Logout</a>
+                              </li>
+                              {% endif %}
+                         </ul>
+                    </div>
+               </div>
+
+
+
+
+
+
+               <div class="d-flex align-items-center">
+                    <a href="#" class="me-3">
+                         <i class="fa-solid fa-bag-shopping fa-1x icon-style"></i>
+                    </a>
+                    <a href="#">
+                         <i class="fa-solid fa-magnifying-glass fa-1x icon-style"></i>
+                    </a>
+                    {% if username %}
+
+                    &nbsp; &nbsp; <p class="text text-light mt-3 ml-4 p-2"
+                         style="border:1px solid #4a2c2a; border-radius:40px; background-color:#4a2c2a;"> &nbsp; Hi {{
+                         username }} !</p>
+                    {% endif %}
+
+
+               </div>
+          </div>
+     </nav>
+
+
+
+     <!-- main content -->
+     <div class="container mt-5">
+          <!-- Heading -->
+          <h2 class="text-center fw-bold mb-2" style=" color: #653b38;">All Users Info</h2>
+
+          <!-- Blog Cards -->
+          <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+               {% for i in userData %}
+               <div class="col">
+                    <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+
+                         <!-- Card Body -->
+                         <div class="card-body text-center" style="background-color: #fdf8f6; padding: 20px;">
+                              <h5 class="card-title" style="color: #653b38; font-weight: bold;"><b>Name :</b>{{ i.username }}</h5>
+                              <p class="card-text text-muted" style="font-size: 14px;"><b>Email :</b> {{i.email}}</p>
+                              <p class="card-text text-muted" style="font-size: 14px;"><b>Role :</b> {{i.role}}</p>
+                         </div>
+                    </div>
+               </div>
+               {% endfor %}
+          </div>
+     </div>
+
+
+
+
+
+
+
+
+
+     <!-- Footer Section -->
+     <footer class="footer">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-4">
+                         <h5 class="footer-title">About Us</h5>
+                         <p class="footer-text">We are passionate about providing the finest jewelry that reflects
+                              timeless elegance. Our designs are crafted with love and care, ensuring every piece tells
+                              a story.</p>
+                    </div>
+
+
+                    <div class="col-md-4">
+                         <h5 class="footer-title">Quick Links</h5>
+                         <ul class="footer-links">
+                              <li><a href="#">Home</a></li>
+                              <li><a href="/aboutus/">About Us</a></li>
+                              <li><a href="/product/">Products</a></li>
+                              <li><a href="#">Blog</a></li>
+                              <li><a href="#">Contact</a></li>
+                         </ul>
+                    </div>
+
+
+                    <div class="col-md-4">
+                         <h5 class="footer-title">Follow Us</h5>
+                         <div class="social-icons">
+                              <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                              <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+                              <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                              <a href="#" class="social-icon"><i class="fa-brands fa-pinterest"></i></a>
+                         </div>
+                    </div>
+               </div>
+
+
+               <div class="text-center mt-4">
+                    <p class="footer-copyright">&copy; 2024 Developed By Sheikh Firdous Fatima. All rights reserved.</p>
+               </div>
+          </div>
+     </footer>
+
+
+
+
+     <!-- bootstrap js link -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+
+               document.addEventListener("DOMContentLoaded", function () {
+                    const navbarToggler = document.querySelector(".navbar-toggler");
+                    const navbarCollapse = document.querySelector(".navbar-collapse");
+
+                    if (navbarToggler && navbarCollapse) {
+                         navbarToggler.addEventListener("click", () => {
+                              navbarCollapse.classList.toggle("show");
+                         });
+                    }
+
+                    // Close navbar when a link is clicked
+                    const navLinks = document.querySelectorAll(".nav-link");
+                    navLinks.forEach(link => {
+                         link.addEventListener("click", () => {
+                              if (navbarCollapse.classList.contains("show")) {
+                                   navbarCollapse.classList.remove("show");
+                              }
+                         });
+                    });
+               });
+
+          </script>
+</body>
+
+</html>

@@ -189,5 +189,13 @@ def show_blog():
      return render_template('show_blog.html' , data = all_data , username=username)
 
 
+#showing users to admin 
+@app.route("/view_user/")
+def userr():
+     username = session.get('username')
+     all_data = db_session.query(User).all()
+     return render_template('user.html',username=username, userData = all_data)
+
+
 if __name__ == '__main__':
      app.run(debug=True)
